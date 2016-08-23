@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.pyx
+*.swp
+*.swo
+*.swn
+__pycache__/
+.cache/
