@@ -23,7 +23,7 @@ def wsgi_app(middleware_enabled=True):
         middleware = None
 
     endpoints=[
-        endpoints.ApiStatus(),
+        endpoints.StatusCheck(),
         ]
 
     return App(
