@@ -2,19 +2,17 @@ import pytz
 
 from datetime import datetime
 
-from axial.service.route import Route, HandlerConfig
+from axial.service.route import Route, handler_config
 
-from .schemas import ApiStatusSchema
+from .schemas import StatusCheckSchema
 
 
 class StatusCheck(Route):
-
     path = '/status'
 
-    get_v1 = HandlerConfig(
-        response=ApiStatusSchema,
+    @handler_config(
+        response=StatusCheckSchema,
         )
-
     def on_get_v1(self, request, response):
         return {
             'name': '{{cookiecutter.service_name.lower()}}',
