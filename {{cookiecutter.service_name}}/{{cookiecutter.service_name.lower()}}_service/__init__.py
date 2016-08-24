@@ -1,27 +1,32 @@
-def wsgi_app(ignore_middleware=False):
+def wsgi_app(middleware_enabled=True):
     from axial.service.app import App
-    from axial.service.middleware import processors
-    from axial.service import middleware
+    from axial.service.middleware.processors import (
+        ProtobufProcessor, JsonProcessor,
+        )
+    from axial.service.middleware import (
+        EncoderDecoder, SqlalchemyConnector
+        )
 
     from .config import settings
     from .db.session import Postgres
     from . import endpoints
 
-    middleware = None
-    if not ignore_middleware:
+    if middleware_enabled:
         middleware = [
-            middleware.EncoderDecoder(processors=[
-                processors.ProtobufProcessor(__package__),
-                processors.JsonProcessor(),
+            EncoderDecoder(processors=[
+                ProtobufProcessor(__package__),
+                JsonProcessor(),
                 ]),
-            middleware.SqlalchemyConnector(Postgres),
+            SqlalchemyConnector(Postgres),
             ]
+    else:
+        middleware = None
 
     endpoints=[
         endpoints.ApiStatus(),
         ]
 
     return App(
-        __package__,
+        settings['service'],
         middleware=middleware,
         endpoints=endpoints)
