@@ -9,12 +9,14 @@ def wsgi_app(middleware_enabled=True):
 
     from .config import settings
     from .db.session import Postgres
-    from . import endpoints
+    from . import routes
+
+    service_name = settings['service']
 
     if middleware_enabled:
         middleware = [
             EncoderDecoder(processors=[
-                ProtobufProcessor(__package__),
+                ProtobufProcessor(service_name),
                 JsonProcessor(),
                 ]),
             SqlalchemyConnector(Postgres),
@@ -22,11 +24,11 @@ def wsgi_app(middleware_enabled=True):
     else:
         middleware = None
 
-    endpoints=[
-        endpoints.StatusCheck(),
+    routes=[
+        routes.StatusCheck(),
         ]
 
     return App(
-        settings['service'],
+        service_name,
         middleware=middleware,
-        endpoints=endpoints)
+        routes=routes)

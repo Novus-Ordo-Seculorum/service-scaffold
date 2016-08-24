@@ -2,12 +2,12 @@ import pytz
 
 from datetime import datetime
 
-from axial.service.endpoint import Endpoint, HandlerConfig
+from axial.service.route import Route, HandlerConfig
 
 from .schemas import ApiStatusSchema
 
 
-class StatusCheck(Endpoint):
+class StatusCheck(Route):
 
     path = '/status'
 
