@@ -28,19 +28,19 @@ with open(os.path.join(HERE, 'requirements.txt')) as f:
 
 class Install(install.install):
     def run(self):
-        tasks.pyrobuf_install(SERVICE_NAME)
+        #tasks.pyrobuf_install(SERVICE_NAME)
         super(Install, self).run()
 
 
 class Develop(develop.develop):
     def run(self):
-        tasks.pyrobuf_install(SERVICE_NAME)
+        #tasks.pyrobuf_install(SERVICE_NAME)
         super(Develop, self).run()
 
 
 class Pyrobuf(alias.alias):
     def run(self):
-        tasks.pyrobuf_install(SERVICE_NAME)
+        #tasks.pyrobuf_install(SERVICE_NAME)
         super(Pyrobuf, self).run()
 
 
