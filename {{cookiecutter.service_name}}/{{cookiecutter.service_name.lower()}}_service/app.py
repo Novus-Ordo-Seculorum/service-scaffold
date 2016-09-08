@@ -1,7 +1,7 @@
 import axial.service
 
 from axial.service.middleware.processors import (
-    #ProtobufProcessor,
+    #ProtobufProcessor,  # TODO: Reenable protobuf when consul is implemented
     JsonProcessor,
     )
 from axial.service.middleware import (
