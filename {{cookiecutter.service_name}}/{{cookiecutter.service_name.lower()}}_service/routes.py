@@ -4,17 +4,17 @@ from datetime import datetime
 
 from axial.service.route import Route, handler_config
 
-from .schemas import StatusCheckSchema
+from .schemas import StatusSchema
 
 
-class StatusCheck(Route):
+class Status(Route):
     path = '/status'
 
     @handler_config(
-        response=StatusCheckSchema,
+        response=StatusSchema,
         )
     def on_get_v1(self, request, response):
         return {
             'name': '{{cookiecutter.service_name.lower()}}',
-            'datetime': str(datetime.now(pytz.utc)),
+            'status': 'ok'
             }

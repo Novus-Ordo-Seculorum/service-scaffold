@@ -1,7 +1,6 @@
 import axial.service
 
 from axial.service.middleware.processors import (
-    #ProtobufProcessor,  # TODO: Reenable protobuf when consul is implemented
     JsonProcessor,
     )
 from axial.service.middleware import (
@@ -18,7 +17,6 @@ class Application(axial.service.Application):
     def middleware(self):
         return [
             EncoderDecoder(processors=[
-                #ProtobufProcessor(self.name),
                 JsonProcessor(),
                 ]),
             SqlalchemyConnector(Postgres),
@@ -27,5 +25,5 @@ class Application(axial.service.Application):
     @property
     def routes(self):
         return [
-            routes.StatusCheck(),
-        ]
+            routes.Status(),
+            ]
